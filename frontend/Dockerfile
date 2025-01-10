@@ -6,6 +6,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
 
 COPY . .
+RUN [ -f .env.production ] || cp .env.example .env.production
 RUN pnpm build
 
 FROM nginx:stable-alpine
