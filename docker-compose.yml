@@ -8,7 +8,7 @@ services:
             - ${MINIO_PORT}:9000
         command: server /data
         volumes:
-            - ${MINIO_DATA_PATH}:/data
+            - ${BALTI_PATH}/minio-data:/data
             # - minio-data:/data # You can use volumes instead of bind mounts
 
     minio-provision:
@@ -16,10 +16,10 @@ services:
         depends_on:
             - minio
         volumes:
-            - ./minio-provision.sh:/minio-provision.sh:ro
-            - ./lifecycle_expiry.json:/lifecycle_expiry.json:ro
-            - ./bucket_policy.json:/bucket_policy.json:ro
-            - ${MINIO_DATA_PATH}:/data
+            - ${BALTI_PATH}/minio-provision.sh:/minio-provision.sh:ro
+            - ${BALTI_PATH}/lifecycle_expiry.json:/lifecycle_expiry.json:ro
+            - ${BALTI_PATH}/bucket_policy.json:/bucket_policy.json:ro
+            - ${BALTI_PATH}/minio-data:/data
         entrypoint: sh /minio-provision.sh
 # You can use volumes instead of bind mounts
 #volumes:
