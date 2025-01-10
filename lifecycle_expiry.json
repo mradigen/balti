@@ -1,0 +1,68 @@
+{
+	"Rules": [
+		{
+			"ID": "DeleteFilesWith7dTag",
+			"Status": "Enabled",
+			"Filter": {
+				"Tag": {
+					"Key": "ExpireAfter",
+					"Value": "7d"
+				}
+			},
+			"Expiration": {
+				"Days": 7
+			}
+		},
+		{
+			"ID": "DeleteFilesWith30dTag",
+			"Status": "Enabled",
+			"Filter": {
+				"Tag": {
+					"Key": "ExpireAfter",
+					"Value": "30d"
+				}
+			},
+			"Expiration": {
+				"Days": 30
+			}
+		},
+		{
+			"ID": "DeleteFilesWith90dTag",
+			"Status": "Enabled",
+			"Filter": {
+				"Tag": {
+					"Key": "ExpireAfter",
+					"Value": "90d"
+				}
+			},
+			"Expiration": {
+				"Days": 90
+			}
+		},
+		{
+			"ID": "DeleteFilesWithExpireAfter",
+			"Status": "Enabled",
+			"Filter": {
+				"Tag": {
+					"Key": "ExpireAfter"
+				}
+			},
+			"Expiration": {
+				"Days": 1
+			}
+		},
+		{
+			"ID": "ExpireUntaggedObjects",
+			"Status": "Enabled",
+			"Filter": {
+				"And": {
+					"Prefix": "",
+					"Tags": []
+				}
+			},
+			"Expiration": {
+				"Days": 1
+			}
+		}
+	]
+}

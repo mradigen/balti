@@ -1,0 +1,26 @@
+# This compose file only deploys and configures minio.
+# If you are looking to host the static frontend site, refer frontend/docker-compose.yml
+
+services:
+    minio:
+        image: minio/minio
+        ports:
+            - ${MINIO_PORT}:9000
+        command: server /data
+        volumes:
+            - ${MINIO_DATA_PATH}:/data
+            # - minio-data:/data # You can use volumes instead of bind mounts
+
+    minio-provision:
+        image: minio/mc
+        depends_on:
+            - minio
+        volumes:
+            - ./minio-provision.sh:/minio-provision.sh:ro
+            - ./lifecycle_expiry.json:/lifecycle_expiry.json:ro
+            - ./bucket_policy.json:/bucket_policy.json:ro
+            - ${MINIO_DATA_PATH}:/data
+        entrypoint: sh /minio-provision.sh
+# You can use volumes instead of bind mounts
+#volumes:
+#    minio-data:
