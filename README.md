@@ -55,7 +55,7 @@ If you wish to host the static frontend as well
     docker compose up -d
     ```
 
-### Testing
+## Testing
 
 WIP
 
