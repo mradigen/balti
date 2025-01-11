@@ -2,5 +2,6 @@ services:
   balti:
     build:
       context: .
+    pull_policy: build
     ports:
       - ${PORT}:80
