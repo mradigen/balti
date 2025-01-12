@@ -1,6 +1,6 @@
 # balti
 
-Stupidly minimal file sharing service. Work in progress
+Stupidly minimal file sharing service.
 
 ## Architecture
 
@@ -10,7 +10,7 @@ A static webpage uploads directly to minio (or any S3 storage bucket).
 
 `lifecycle_expiry.json` set the rules to expire objects depending on their `ExpireAfter` tag.
 
-Uses [short](https://github.com/mradigen/short) to shorten long S3 URLs.
+Uses [chota](https://github.com/mradigen/chota) to shorten long S3 URLs.
 
 ## Self-host
 
