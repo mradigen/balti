@@ -17,16 +17,20 @@
 	let filesUploaded: FileUploaded[] = [];
 
 	async function upload(file: File) {
+		const fileID = filesUploaded.length;
+		filesUploaded.push({
+			name: file.name,
+			url: 'Uploading...',
+			expiry: selectedExpiry
+		});
+		filesUploaded = filesUploaded; // Trigger an update
+
 		const longURL = await uploadFile(file, selectedExpiry);
 		if (longURL == null) return alert('Error');
 		const shortURL = await shortenURL(longURL);
 		if (shortURL == null) return alert('Error');
-		filesUploaded.push({
-			name: file.name,
-			url: shortURL,
-			expiry: selectedExpiry
-		});
-		filesUploaded = filesUploaded; // Trigger an update
+
+		filesUploaded[fileID].url = shortURL;
 	}
 
 	export function fileDropped(e: DragEvent) {
@@ -53,7 +57,7 @@
 	<div class="flex flex-col items-center space-y-8 font-extrabold">
 		<Github></Github>
 
-		<input type="file" class="hidden" bind:this={fileInput} on:change={fileInputUpload} />
+		<input type="file" class="hidden" bind:this={fileInput} on:change={fileInputUpload} multiple />
 		<button
 			class="flex h-[50vh] w-[50vw] items-center justify-center rounded-lg border-2 border-dashed border-gray-500 bg-gray-100 hover:cursor-pointer hover:bg-gray-200"
 			on:click={() => fileInput.click()}
