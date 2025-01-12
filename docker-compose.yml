@@ -6,7 +6,8 @@ services:
         image: minio/minio
         ports:
             - ${MINIO_PORT}:9000
-        command: server /data
+            - 9001
+        command: server /data --console-address ":9001"
         volumes:
             - ${BALTI_PATH}/minio-data:/data
             # - minio-data:/data # You can use volumes instead of bind mounts
